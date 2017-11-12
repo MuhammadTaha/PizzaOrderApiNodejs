@@ -4,6 +4,9 @@ var Schema = mongoose.Schema;
 
 
 var OrderSchema = new Schema({
+  id: {
+    type: number
+  },
   name: {
     type: String,
     required: 'Kindly enter the name of the task'
