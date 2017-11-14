@@ -7,11 +7,11 @@ var SchemaTypes = mongoose.Schema.Types;
 
 var PizzaSchema = new Schema({
   id: {
-    type: number,
+    type: Number,
   },
   name: {
     type: String,
-    required: 'Kindly enter the title'
+    required: 'Kindly enter the name'
   },
   size: {
     type: [{
@@ -21,7 +21,7 @@ var PizzaSchema = new Schema({
       default: ['Standard']
   },
   price: {
-    type: Topping.price
+    type: Number
   },
   
 });

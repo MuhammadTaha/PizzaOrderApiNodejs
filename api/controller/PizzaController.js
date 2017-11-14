@@ -1,11 +1,10 @@
 'use strict';
 
-
 var mongoose = require('mongoose'),
 
 Pizza = mongoose.model('Pizza');
-
-exports.list_pizza = function(req, res) {
+console.log('in controller');
+exports.list_all_pizza = function(req, res) {
   Pizza.find({}, function(err, task) {
     if (err)
       res.send(err);
@@ -16,6 +15,7 @@ exports.list_pizza = function(req, res) {
 
 exports.create_pizza = function(req, res) {
   var new_pizza = new Pizza(req.body);
+  console.log(req);
   new_pizza.save(function(err, task) {
     if (err)
       res.send(err);
@@ -24,7 +24,7 @@ exports.create_pizza = function(req, res) {
 };
 
 
-exports.read_a_pizza = function(req, res) {
+exports.read_pizza = function(req, res) {
   Pizza.findById(req.params.taskId, function(err, task) {
     if (err)
       res.send(err);
@@ -33,7 +33,7 @@ exports.read_a_pizza = function(req, res) {
 };
 
 
-exports.update_a_pizza = function(req, res) {
+exports.update_pizza = function(req, res) {
   Pizza.findOneAndUpdate({id: req.params.taskId}, req.body, {new: true}, function(err, task) {
     if (err)
       res.send(err);
@@ -42,7 +42,7 @@ exports.update_a_pizza = function(req, res) {
 };
 
 
-exports.delete_a_pizza = function(req, res) {
+exports.delete_pizza = function(req, res) {
 
 
   Pizza.remove({

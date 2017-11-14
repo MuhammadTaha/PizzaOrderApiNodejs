@@ -1,15 +1,16 @@
 'use strict';
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var SchemaTypes = mongoose.Schema.Types;
+var Schema = mongoose.Schema,
+SchemaTypes = mongoose.Schema.Types,
+Sequelize = require('sequelize');
 
 var OrderItemSchema = new Schema({
   pizzaId: {
-    type: number,
+    type: Number,
     required: 'Kindly enter the title'
   },
   price: {
-    type: SchemaTypes.Double,
+    type: Number,
     required: 'Kindly enter the price'
   },
   

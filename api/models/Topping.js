@@ -6,14 +6,14 @@ var SchemaTypes = mongoose.Schema.Types;
 
 var ToppingSchema = new Schema({
   id: {
-    type: number,
+    type: Number,
   },
   name: {
     type: String,
     required: 'Kindly enter the title'
   },
   price: {
-    type: SchemaTypes.Double,
+    type: Number,
     required: 'Kindly enter the price'
   },
   

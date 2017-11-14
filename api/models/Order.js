@@ -1,26 +1,21 @@
 'use strict';
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
+var Schema = mongoose.Schema,
+orderItem = require('./OrderItem');
 
 var OrderSchema = new Schema({
   id: {
-    type: number
+    type:Number
   },
-  name: {
+  orderItems: {
     type: String,
-    required: 'Kindly enter the name of the task'
+    required: 'Kindly enter the order'
   },
-  Created_date: {
-    type: Date,
-    default: Date.now
+  totalPrice: {
+    type: Number
   },
-  status: {
-    type: [{
-      type: String,
-      enum: ['pending', 'ongoing', 'completed']
-    }],
-    default: ['pending']
+  Recipient: {
+    type: String
   }
 });
 
