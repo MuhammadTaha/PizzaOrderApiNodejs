@@ -1,35 +1,19 @@
-var express = require('express');
+var express = require('express'),
+  app = express(),
+  port = process.env.PORT || 3000,
+  mongoose = require('mongoose'),
+  Pizza = require('./api/models/pizzaModel'),
+  bodyParser = require('body-parser');
 
-var bodyParser = require('body-parser');
-
-var MongoClient = require('mongodb').MongoClient,
-routes = require('./api/routes/PizzaRoute'); //importing route
-mongoose = require('mongoose'),
-Order = require('./api/models/Order'), 
-Pizza = require('./api/models/Pizza'), 
-OrderItem = require('./api/models/OrderItem'), 
-Topping = require('./api/models/Topping'), 
-
-// Connect to the db
-MongoClient.connect("mongodb://localhost:27017/PizzaAppDB", function(err, db) {
-  if(!err) {
-    console.log("Database connected...");
-  }
-});
-
-app = express(),
-port = process.env.PORT || 3001;
-app.get('/', function(req, res){
-    res.send('hello world');
-  });
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/PizzaServiceDB');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-routes(app); //register the route
-
+var routes = require('./api/routes/pizzaRoutes');
+routes(app);
 
 app.listen(port);
 
-console.log('Pizza Order REST API server started on: ' + port);
+console.log('Pizza Order Service RESTful API server started on: ' + port);
