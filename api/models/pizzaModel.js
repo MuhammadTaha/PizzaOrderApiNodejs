@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var PizzaSchema = new Schema({
   id: {
     type: Number,
+    unique: true,
     required: 'Kindly enter the id for the Pizza'
   },
   name: {
