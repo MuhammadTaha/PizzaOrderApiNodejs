@@ -36,8 +36,8 @@ module.exports = function (app) {
 
 
   app.route('/order/:orderId')
-  // .delete(pizza.delete_topping)
+  .delete(pizza.delete_order)
   .get(pizza.get_order);
-  // .post(pizza.create_order);
+
 
 };

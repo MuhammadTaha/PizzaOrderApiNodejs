@@ -15,6 +15,10 @@ var OrderItem = sequelize.define('OrderItem',{
     primaryKey:true,
     autoIncrement:true
   },
+  orderId: {
+    type: Sequelize.BIGINT,
+    allowNull: false,
+  },
   pizzaId: {
     type: Sequelize.BIGINT,
     allowNull: false,

@@ -246,47 +246,60 @@ exports.create_order = function (req, res) {
   //  req.body["orderItems"]["id"] = 4;
   var totalCost = 0;
   var pId = 0;
+  var oId = 0;
 
-  req.body["orderItems"].forEach(element => {
-    console.log(element.pizzaId);
+  var request = req.body;
+
+  if (request['id'])
+    delete request['id'];
+
+  var orderData = {
+    "totalPrice": request["totalPrice"],
+    "recipient": request["recipient"]
+  };
+
+  Order.create(orderData)
+    .then(function (newOrder) {
+      console.log(newOrder.dataValues.id);
+      oId = newOrder.dataValues.id;
+
+      req.body["orderItems"].forEach(element => {
+        element["orderId"] = oId;
+        OrderItem.create(element)
+          .then(function (newModel) {
+
+            console.log(newModel.dataValues);
+
+            // if(newModel.dataValues.pizzaId)
+            // {
+            //   pId=newModel.dataValues.pizzaId;
+            //   var orderData = {
+            //     "totalprice":request["totalPrice"],
+            //     "recipient":request["recipient"],
+            //     "orderItemId":newModel.dataValues.id,
+            //   };
 
 
-    var request = req.body;
-    console.log(request["recipient"]);
-    OrderItem.create(element)
-      .then(function (newModel) {
-        if(newModel.dataValues.pizzaId)
-        {
-          pId=newModel.dataValues.pizzaId;
-          var orderData = {
-            "totalprice":request["totalPrice"],
-            "recipient":request["recipient"],
-            "orderItemId":newModel.dataValues.id,
-          };
 
-          Order.create(orderData)
-          .then(function (newOrder) {
-            console.log(newOrder.dataValues);
+            // console.log(newModel.dataValues);
+            // console.log(newModel.dataValues.pizzaId);
+            // console.log(newModel.dataValues.quantity);
+
+
           });
-        }
-        // console.log(newModel.dataValues);
-        // console.log(newModel.dataValues.pizzaId);
-        // console.log(newModel.dataValues.quantity);
-        
-        
+        // var orderItem = new OrderItem(element);
+        // console.log(orderItem);
+
+        // orderItem.save(function (err, item) {
+        //   console.log(item);
+        //   if (err)
+        //     res.send(err);
+
+        //   res.json(item);
+        // });
+
       });
-    // var orderItem = new OrderItem(element);
-    // console.log(orderItem);
-
-    // orderItem.save(function (err, item) {
-    //   console.log(item);
-    //   if (err)
-    //     res.send(err);
-
-    //   res.json(item);
-    // });
-
-  });
+    });
   // }
   // Pizza.find({'id':req}, function(err, pizza) {
   //   if (err)
@@ -296,36 +309,57 @@ exports.create_order = function (req, res) {
 };
 
 
-exports.get_all_orders = function(req, res) {
+exports.get_all_orders = function (req, res) {
   var requestParams = req.params;
-  if(requestParams){
+  if (requestParams) {
     var arr = [];
     Order.findAll({ attributes: ['id'], raw: true }).then(result => {
-    result.forEach(element=>{
-      arr.push(element.id);
-    });
-    console.log(arr);
+      result.forEach(element => {
+        arr.push(element.id);
+      });
+      console.log(arr);
     });
   }
 
 };
 
 
-exports.get_order = function(req, res) {
+exports.get_order = function (req, res) {
   var requestParams = req.params;
-  if(requestParams){
-    
-    Order.findAll({ where:{id : requestParams.orderId }, attributes: ['id'], raw: true }).then(result => {
+  if (requestParams) {
+
+    Order.findOne({ where: { id: requestParams.orderId }, raw: true }).then(result => {
       console.log(result);
+
+      OrderItem.findAll({ where: { orderId: requestParams.orderId }, raw: true }).then(items => {
+        console.log(items);
+  
+        
+        result["orderItems"] = items;
+        console.log(result);
+      });
+
+
     });
   }
 };
 
 
-// exports.delete_order= function(req, res) {
-//   Pizza.find({'id':req}, function(err, pizza) {
-//     if (err)
-//       res.send(err);
-//     res.json(pizza);
-//   });
-// };
+exports.delete_order= function(req, res) {
+  var requestBody = req.params.id;
+  OrderItem.destroy({
+    where: {
+      orderId: req.params.orderId
+    }
+  }).then(function (resultItems) {
+    console.log(resultItems);
+    Order.destroy({
+      where: {
+        id: req.params.orderId
+      }
+    }).then(function (result) {
+      console.log(result);
+  
+    });
+  });
+};

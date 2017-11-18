@@ -14,10 +14,6 @@ const Order = sequelize.define('Order',{
     primaryKey:true,
     autoIncrement:true
   },
-  orderItemId: {
-    type: Sequelize.BIGINT,
-    allowNull: false,
-  },
   totalPrice: {
     type: Sequelize.FLOAT,
   },
