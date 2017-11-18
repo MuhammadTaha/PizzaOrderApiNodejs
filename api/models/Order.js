@@ -5,7 +5,8 @@ orderItem = require('./OrderItem');
 
 var OrderSchema = new mongoose.Schema({
   id: {
-    type:Number
+    type:Number,
+    unique:true,
   },
   orderItems: {
     type: String,

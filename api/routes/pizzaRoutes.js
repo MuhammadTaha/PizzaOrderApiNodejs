@@ -3,13 +3,14 @@
 module.exports = function (app) {
   console.log("in controller");
   var pizza = require('../controllers/pizzaController.js');
+
   console.log("in route");
 
 
   // pizza Routes
   app.route('/pizza')
     .get(pizza.list_all_pizza)
-    .post(pizza.create_a_pizza);
+    .post(pizza.create_pizza);
 
   app.route('/pizza/:id')
     .get(pizza.get_pizza)
@@ -24,4 +25,11 @@ module.exports = function (app) {
   app.route('/pizza/:pizzaId/topping/:toppingId')
   .delete(pizza.delete_topping)
   .get(pizza.get_topping);
+
+  // routes for order
+  app.route('/order')
+  // .delete(pizza.delete_topping)
+  .post(pizza.create_order);
+
+
 };

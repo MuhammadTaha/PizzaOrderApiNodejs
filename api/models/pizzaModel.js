@@ -2,11 +2,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var autoIncrement = require('mongoose-auto-increment');
+var connection = mongoose.createConnection("mongodb://localhost/PizzaServiceDB");
+autoIncrement.initialize(connection);
+
+
 var PizzaSchema = new Schema({
   id: {
     type: Number,
-    unique: true,
-    required: 'Kindly enter the id for the Pizza'
   },
   name: {
     type: String,
@@ -22,4 +25,5 @@ var PizzaSchema = new Schema({
   }
 });
 
+PizzaSchema.plugin(autoIncrement.plugin,{model:"Pizza",field:"id"});
 module.exports = mongoose.model('Pizza', PizzaSchema);
