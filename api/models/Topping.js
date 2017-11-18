@@ -1,27 +1,32 @@
 'use strict';
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 // autoIncrement = require('mongoose-auto-increment');
-var Schema = mongoose.Schema;
+// var Schema = mongoose.Schema;
 
-var SchemaTypes = mongoose.Schema.Types;
+// var SchemaTypes = mongoose.Schema.Types;
+var db = require("../../db");
+var sequelize =  db.sequelize,
+Sequelize =  db.Sequelize ;
 
-var ToppingSchema = new Schema({
+
+const Topping = sequelize.define('Topping',{
   id: {
-    type: Number,
-    unique: true,
+    type: Sequelize.BIGINT,
+    allowNull: false,
+    primaryKey:true,
+    autoIncrement:true
   },
-  pizza_id: {
-    type: Number,
-    required: 'Kindly enter the pizza reference identity'
+  pizzaId: {
+    type: Sequelize.BIGINT,
+    allowNull: false,
   },
   name: {
-    type: String,
-    required: 'Kindly enter the title'
+    type: Sequelize.STRING,
   },
   price: {
-    type: Number,
-    required: 'Kindly enter the price'
-  },
+    type: Sequelize.FLOAT,
+    allowNull: false
+  }
 
 });
 // var connection = mongoose.createConnection("mongodb://localhost/PizzaServiceDB");
@@ -30,4 +35,6 @@ var ToppingSchema = new Schema({
 
 
 // ToppingSchema.plugin(autoIncrement.plugin, 'Topping');
-module.exports = mongoose.model('Topping', ToppingSchema);
+// module.exports = mongoose.model('Topping', ToppingSchema);
+
+module.exports = Topping;

@@ -6,7 +6,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/pizzaController.js" afterPath="$PROJECT_DIR$/api/controllers/pizzaController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/models/Order.js" afterPath="$PROJECT_DIR$/api/models/Order.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/models/OrderItem.js" afterPath="$PROJECT_DIR$/api/models/OrderItem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/models/pizzaModel.js" afterPath="$PROJECT_DIR$/api/models/pizzaModel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/models/Pizza.js" afterPath="$PROJECT_DIR$/api/models/Pizza.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/routes/pizzaRoutes.js" afterPath="$PROJECT_DIR$/api/routes/pizzaRoutes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
     </list>

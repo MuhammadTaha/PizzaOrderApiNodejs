@@ -1,23 +1,32 @@
 'use strict';
-var mongoose = require('mongoose'),
+// var mongoose = require('mongoose'),
 // var Schema = mongoose.Schema,
-orderItem = require('./OrderItem');
+var orderItem = require('./OrderItem');
+var db = require("../../db");
+var sequelize =  db.sequelize,
+Sequelize =  db.Sequelize ;
 
-var OrderSchema = new mongoose.Schema({
+
+const Order = sequelize.define('Order',{
   id: {
-    type:Number,
-    unique:true,
+    type: Sequelize.BIGINT,
+    allowNull: false,
+    primaryKey:true,
+    autoIncrement:true
   },
-  orderItems: {
-    type: String,
-    required: 'Kindly enter the order'
+  orderItemId: {
+    type: Sequelize.BIGINT,
+    allowNull: false,
   },
   totalPrice: {
-    type: Number
+    type: Sequelize.FLOAT,
   },
-  Recipient: {
-    type: String
+  recipient: {
+    type: Sequelize.STRING,
+    allowNull: false,
   }
 });
 
-module.exports = mongoose.model('Order', OrderSchema);
+module.exports = Order;
+
+// module.exports = mongoose.model('Order', OrderSchema);

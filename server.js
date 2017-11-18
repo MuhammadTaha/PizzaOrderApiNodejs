@@ -7,25 +7,27 @@ var express = require('express'),
 
   // var connection = mongoose.createConnection("mongodb://localhost/PizzaServiceDB");
   // autoIncrement.initialize(connection);
-  Pizza = require('./api/models/pizzaModel'),
+  Pizza = require('./api/models/Pizza'),
   // Topping = require('./api/models/Topping'),
   // Order = require('./api/models/Order'),
   // OrderItem = require('./api/models/OrderItem'),
 
   bodyParser = require('body-parser');
-  var mysql = require('mysql');
 
-  var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "taha@123",
-    database : 'PizzaOrder'
-  });
+  var db = require('./db');
+  // var mysql = require('mysql');
+
+  // var con = mysql.createConnection({
+  //   host: "localhost",
+  //   user: "root",
+  //   password: "taha@123",
+  //   database : 'PizzaOrder'
+  // });
   
-  con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
+  // con.connect(function(err) {
+  //   if (err) throw err;
+  //   console.log("Connected!");
+  // });
 
 
 

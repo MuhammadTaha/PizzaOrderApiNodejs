@@ -16,6 +16,9 @@
     "express": "^4.16.2",
     "mongoose": "^4.13.2",
     "mongoose-auto-increment": "^5.0.1",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.0",
+    "sequelize": "^4.22.8",
+    "underscore": "^1.8.3"
   }
 }

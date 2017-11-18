@@ -26,10 +26,18 @@ module.exports = function (app) {
   .delete(pizza.delete_topping)
   .get(pizza.get_topping);
 
+
+
   // routes for order
   app.route('/order')
   // .delete(pizza.delete_topping)
+  .get(pizza.get_all_orders)
   .post(pizza.create_order);
 
+
+  app.route('/order/:orderId')
+  // .delete(pizza.delete_topping)
+  .get(pizza.get_order);
+  // .post(pizza.create_order);
 
 };

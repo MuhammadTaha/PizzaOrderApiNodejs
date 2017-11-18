@@ -1,23 +1,32 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema,
-SchemaTypes = mongoose.Schema.Types;
+// var mongoose = require('mongoose');
+// var Schema = mongoose.Schema,
+// SchemaTypes = mongoose.Schema.Types;
 // Sequelize = require('sequelize');
 // autoIncrement = require('mongoose-auto-increment');
+var db = require("../../db");
+var sequelize =  db.sequelize,
+Sequelize =  db.Sequelize ;
 
-var OrderItemSchema = new Schema({
+var OrderItem = sequelize.define('OrderItem',{
+  id: {
+    type: Sequelize.BIGINT,
+    allowNull: false,
+    primaryKey:true,
+    autoIncrement:true
+  },
   pizzaId: {
-    type: Number,
-    required: 'Kindly enter pizza id'
+    type: Sequelize.BIGINT,
+    allowNull: false,
   },
   quantity: {
-    type: Number,
-    required: 'Kindly enter quantity'
+    type: Sequelize.INTEGER,
+    allowNull: false,
   },
   
 });
 
-
+module.exports = OrderItem;
 
 // var orderItem = mongoose.model('OrderItem', OrderItemSchema);
 // OrderItemSchema.pre('save', function(next) {
@@ -30,4 +39,4 @@ var OrderItemSchema = new Schema({
 //   });
 // });
 // OrderItemSchema.plugin(autoIncrement.plugin,{model:"OrderItem",field:"id"});
-module.exports = mongoose.model('OrderItem', OrderItemSchema);
+// module.exports = mongoose.model('OrderItem', OrderItemSchema);
